@@ -66,6 +66,7 @@ public class UserDaoTest
     {
         System.out.println(userDao.getUserIdByName("tom1"));
         System.out.println("git");
+        System.out.println("git1");
 
     }
 }
