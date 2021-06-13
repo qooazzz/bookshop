@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.gdpu.dao.OrderItemDao">
+
+    <resultMap id="mymap" type="cn.edu.gdpu.bean.OrderItem">
+        <id property="id" column="id"/>
+        <result property="name" column="bookname"/>
+        <result property="count" column="count"/>
+        <result property="price" column="price"/>
+        <result property="totalProce" column="totalProce"/>
+        <result property="orderId" column="orderId"/>
+    </resultMap>
+
+    <!--    public List<OrderItem> getOrderItemsByOrderId(String orderId);-->
+    <select id="getOrderItemsByOrderId" resultMap="mymap">
+        select * from t_orderitem where orderId=#{orderId}
+    </select>
+
+
+    <!--    public int updateOrderItem(OrderItem OrderItem);-->
+    <update id="updateOrderItem">
+        update t_orderitem
+        <set>
+            <if test="name!=null &amp;&amp; !name.equals('')">
+                bookname=#{name},
+            </if>
+            <if test="count!=null ">
+                count=#{count},
+            </if>
+            <if test="price!=null">
+                price=#{price},
+            </if>
+            <if test="totalPrice!=null">
+                totalPrice=#{totalPrice},
+            </if>
+            <if test="orderId!=null &amp;&amp; !orderId.equals('')">
+                orderId=#{orderId},
+            </if>
+        </set>
+        <where>
+            id=#{id}
+        </where>
+
+    </update>
+
+    <!--    public int addOrderItem(OrderItem OrderItem);-->
+    <insert id="addOrderItem">
+        insert into t_orderitem values (#{id},#{name},#{count},#{price},#{totalPrice},#{orderId})
+    </insert>
+
+    <!--    public int deleteOrderItemByOrderId(String orderId);-->
+    <delete id="deleteOrderItemByOrderId">
+        delete  from t_orderitem where orderId=#{orderId}
+    </delete>
+
+    <!--    public List<OrderItem> getOrderItemByOrderId(String orderId);//根据订单编号获取订单项-->
+    <select id="getOrderItemByOrderId" resultMap="mymap">
+        select * from t_orderitem where orderId=#{orderId}
+    </select>
+
+</mapper>

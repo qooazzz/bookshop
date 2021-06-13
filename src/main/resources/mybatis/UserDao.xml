@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.gdpu.dao.UserDao">
+
+    <resultMap id="mymap" type="cn.edu.gdpu.bean.User">
+        <id property="id" column="id"/>
+        <result property="name" column="username"/>
+        <result property="password" column="password"/>
+        <result property="email" column="email"/>
+    </resultMap>
+
+    <!--    public User getUserById(Integer id);-->
+    <select id="getUserById" resultMap="mymap">
+         select * from t_user where id=#{id}
+    </select>
+
+    <!--    public int updateUser(User user);-->
+    <update id="updateUser">
+        update t_user
+        <set>
+            <if test="name!=null &amp;&amp; !name.equals('')">
+                username=#{name},
+            </if>
+            <if test="password!=null &amp;&amp; !password.equals('')">
+                password=#{password},
+            </if>
+        </set>
+        <where>
+            id=#{id}
+        </where>
+    </update>
+
+    <!--    public int addUser(User user);-->
+    <insert id="addUser">
+        insert into t_user values(#{id},#{name},#{password},#{email})
+    </insert>
+
+    <!--    public int deleteUserById(Integer id);-->
+    <delete id="deleteUserById">
+        delete from t_user where id=#{id}
+    </delete>
+
+    <!--    public List<User> getUsers();-->
+    <select id="getUsers" resultMap="mymap">
+        select * from t_user
+    </select>
+
+    <!--    public User getUserByUsernameAndPassword(String username, String password);-->
+    <select id="getUserByUsernameAndPassword" resultMap="mymap">
+        SELECT * FROM t_user where username=#{username} and password=#{password}
+    </select>
+
+<!--    public User getUserByUsername(String username);-->
+    <select id="getUserByUsername" resultMap="mymap">
+        SELECT * FROM t_user where username=#{username}
+    </select>
+
+    <!--    public Integer getUserIdByName(String username);-->
+    <select id="getUserIdByName" resultType="Integer">
+        select id from t_user where username=#{username}
+    </select>
+
+</mapper>
+
