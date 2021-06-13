@@ -69,5 +69,6 @@ public class UserDaoTest
         System.out.println("git1");
         System.out.println("hotfixgit");
         System.out.println("mastertest");
+        System.out.println("hotfixtest");
     }
 }
