@@ -71,5 +71,6 @@ public class UserDaoTest
         System.out.println("mastertest");
         System.out.println("hotfixtest");
         System.out.println("pulltest1");
+        System.out.println("pushtest");
     }
 }
